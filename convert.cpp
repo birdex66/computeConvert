@@ -159,9 +159,6 @@ string decimal(string choiceCur,string input){
         return convert;
 }
 
-
-//TODO: MODIFY BINARY FUNCTION TO REPRESENT A SPECIFIC BIT LENGTH UPON REQUEST(done)
-//TODO: CLEANUP CODE (WRITING EXCEPTIONS FOR THINGS THAT DONT MAKE SENSE ;-; )
 string binary(string choiceCur,string input, size_t bitlen){
 	if(!checkType(input, choiceCur)) return "ERR";
 
@@ -374,7 +371,7 @@ string twoComplement(string input, string numType){
 	}
 
 	/*
-	  	size_t bitLength = input.size();
+	    size_t bitLength = input.size();
 	    input = string(bitLength - input.size(), '0') + input;
 	*/
 
@@ -425,19 +422,6 @@ string subtract(string inputOne, string inputTwo, string numType) {
 
     return result;
 }
-
-/*
- * 10100
- * 01010
- *
- * 10100
- * 10110
- *
- * 11010
- *
- * 00110
- *
- */
 
 string add(string inputOne,string inputTwo,string numType){
 
