@@ -30,14 +30,14 @@ int main(int argc, char** argv){
                 getline(cin, choice);
 
                 if(choice == "1"){
-                	calculate();
+                        calculate();
                 }else if(choice == "2"){
-                	convert();
+                        convert();
                 }else if(choice == "E"){
-                	printf("\n+++++++++++\nExiting...\n");
-                	break;
+                        printf("\n+++++++++++\nExiting...\n");
+                        break;
                 }else{
-                	printf("Invalid choice. Please try again.\n\n");
+                        printf("Invalid choice. Please try again.\n\n");
                     sleep(1);
                 }
         }
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
 }
 
 string octal(string choiceCur, string input){
-	if(!checkType(input, choiceCur)) return "ERR";
+        if(!checkType(input, choiceCur)) return "ERR";
 
         string convert = "";
 
@@ -56,22 +56,22 @@ string octal(string choiceCur, string input){
         //cout << "Decimal Val: " << input << endl;
 
         try{
-			long long dec = stoll(input);
-				if (dec == 0) return "0";
+                        long long dec = stoll(input);
+                                if (dec == 0) return "0";
 
-			for(long long con=dec; con>0; con/=8){
-					//convert += to_string(con % 8);
-					int check = con % 8;
-					convert = to_string(check)+ convert;
-			}
+                        for(long long con=dec; con>0; con/=8){
+                                        //convert += to_string(con % 8);
+                                        int check = con % 8;
+                                        convert = to_string(check)+ convert;
+                        }
 
-			if(!checkType(convert, "O")) return "ERR";
+                        //if(!checkType(convert, "O")) return "ERR";
 
 
         }catch(const std::out_of_range& e){
-        	cerr << "Error: 64 bit integers only!" << endl;
+                cerr << "Error: 64 bit integers only!" << endl;
         }catch(const std::invalid_argument& e){
-        	cerr << "Error: Wrong data type!" << endl;
+                cerr << "Error: Wrong data type!" << endl;
         }
 
         return convert;
@@ -80,7 +80,7 @@ string octal(string choiceCur, string input){
 }
 
 string hex(string choiceCur,string input){
-	if(!checkType(input, choiceCur)) return "ERR";
+        if(!checkType(input, choiceCur)) return "ERR";
 
 
         string convert = "";
@@ -91,28 +91,28 @@ string hex(string choiceCur,string input){
         //cout << "Decimal Val: " << input << endl;
 
         try{
-			long long dec = stoll(input);
-			if(dec == 0) return "0";
+                        long long dec = stoll(input);
+                        if(dec == 0) return "0";
 
-			for(long long con = dec; con>0; con/=16){
-					//convert += to_string(con % 16);
-					int check = con % 16;
-					convert = (check > 9 ? char((check - 10) + 'A') : char(check + '0')) + convert;
-			}
+                        for(long long con = dec; con>0; con/=16){
+                                        //convert += to_string(con % 16);
+                                        int check = con % 16;
+                                        convert = (check > 9 ? char((check - 10) + 'A') : char(check + '0')) + convert;
+                        }
 
-			if(!checkType(convert, "H")) return "ERR";
+                        //if(!checkType(convert, "H")) return "ERR";
 
         }catch(const std::out_of_range& e){
-        	cerr << "Error: 64 bit integers only!" << endl;
+                cerr << "Error: 64 bit integers only!" << endl;
         }catch(const std::invalid_argument& e){
-        	cerr << "Error: Wrong data type!" << endl;
+                cerr << "Error: Wrong data type!" << endl;
         }
 
         return convert;
 }
 
 string decimal(string choiceCur,string input){
-	if(!checkType(input, choiceCur)) return "ERR";
+        if(!checkType(input, choiceCur)) return "ERR";
 
         string convert = "";
         int constant;
@@ -128,274 +128,276 @@ string decimal(string choiceCur,string input){
         }
 
         try{
-			long long dec = 0;
-			int len = input.length();
+                        long long dec = 0;
+                        int len = input.length();
 
-			for(int con = 0; con < len; ++con){
-						//cout << input[input.length() - 1 - con] << " * 2^" << con << endl;
-					char ref = input[len-1-con];
+                        for(int con = 0; con < len; ++con){
+                                                //cout << input[input.length() - 1 - con] << " * 2^" << con << endl;
+                                        char ref = input[len-1-con];
 
-					if(constant == 2){
-							dec += (ref == '1') ? pow(constant,con): 0;
-					}else if(constant == 8){
-							dec += (ref - '0') * pow(constant,con);
-					}else if(constant == 16){
-							if(ref >= 'A' && ref <= 'F'){
-									dec += (ref - 'A' + 10) * pow(constant,con);
-							}else{
-									dec += (ref - '0') * pow(constant, con);
-							}
+                                        if(constant == 2){
+                                                        dec += (ref == '1') ? pow(constant,con): 0;
+                                        }else if(constant == 8){
+                                                        dec += (ref - '0') * pow(constant,con);
+                                        }else if(constant == 16){
+                                                        if(ref >= 'A' && ref <= 'F'){
+                                                                        dec += (ref - 'A' + 10) * pow(constant,con);
+                                                        }else{
+                                                                        dec += (ref - '0') * pow(constant, con);
+                                                        }
 
-					}
-			}
-			convert = to_string(dec);
+                                        }
+                        }
+                        convert = to_string(dec);
 
         }catch(const std::out_of_range& e){
-        	cerr << "Error: 64 bit integers only!" << endl;
+                cerr << "Error: 64 bit integers only!" << endl;
         }catch(const std::invalid_argument& e){
-        	cerr << "Error: Wrong data type!" << endl;
+                cerr << "Error: Wrong data type!" << endl;
         }
 
         return convert;
 }
 
 string binary(string choiceCur,string input, size_t bitlen){
-	if(!checkType(input, choiceCur)) return "ERR";
+        if(!checkType(input, choiceCur)) return "ERR";
 
-	string convert = "";
-	size_t bitref = bitlen;
+        string convert = "";
+        size_t bitref = bitlen;
 
-	try{
-		if(choiceCur == "B") return input;
-		if(choiceCur != "D") input = decimal(choiceCur,input);
+        try{
+                if(choiceCur == "B") return input;
+                if(choiceCur != "D") input = decimal(choiceCur,input);
 
-		long long dec = stoll(input);
+                long long dec = stoll(input);
 
-			if (dec == 0 && bitlen == 0){
-		            convert = "0";
-			}else if(bitlen == 0){
-					for(long long con=dec; con>0; con/=2){
-							string ref = to_string(con % 2);
-							if(ref != "1" && ref != "0") return "Error\n";
-							convert = ref + convert;
-					}
-			}else{
-				while(bitref > 0){
-					int ref = 1 << (bitref-1);
-					if(ref <= dec){
-						convert += "1";
-						dec -= ref;
-					}else{
-						convert += "0";
-					}
-					bitref--;
-				}
+                        if (dec == 0 && bitlen == 0){
+                            convert = "0";
+                        }else if(bitlen == 0){
+                                        for(long long con=dec; con>0; con/=2){
+                                                        string ref = to_string(con % 2);
+                                                        if(ref != "1" && ref != "0") return "Error\n";
+                                                        convert = ref + convert;
+                                        }
+                        }else{
+                                while(bitref > 0){
+                                        int ref = 1 << (bitref-1);
+                                        if(ref <= dec){
+                                                convert += "1";
+                                                dec -= ref;
+                                        }else{
+                                                convert += "0";
+                                        }
+                                        bitref--;
+                                }
 
-				string check = binary(choiceCur,input,0);
-				if(stoll(convert) < stoll(check)){
-					printf("\nError: Input exceeds bit buffer. Returning lowest available estimate...\n");
-					return check;
-				}
-			}
+                                string check = binary(choiceCur,input,0);
+                                if(stoll(convert) < stoll(check)){
+                                        printf("\nError: Input exceeds bit buffer. Returning lowest available estimate...\n");
+                                        return check;
+                                }
+                        }
 
-			if(convert.size() < bitlen){
-				convert = string(bitlen - convert.size(),'0') + convert;
-			}
+                        if(convert.size() < bitlen){
+                                convert = string(bitlen - convert.size(),'0') + convert;
+                        }
 
 
-	}catch(const std::out_of_range& e){
-		cerr << "Error: 64 bit integers max!" << endl;
-	}catch(const std::invalid_argument& e){
-		cerr << "Error: Wrong data type!" << endl;
-	}
+        }catch(const std::out_of_range& e){
+                cerr << "Error: 64 bit integers max!" << endl;
+        }catch(const std::invalid_argument& e){
+                cerr << "Error: Wrong data type!" << endl;
+        }
 
         return convert;
 }
 
 
 void convert(){
-		string choiceConvert;
-		string choiceCur;
-		string input;
+                string choiceConvert;
+                string choiceCur;
+                string input;
 
-		printf("\nConvert your text to:\n--------------------\nBinary\t\t(B)\nDecimal\t\t(D)\nHexaDecimal\t(H)\nOctal\t\t(O)\n\nBack\t\t(E)\n\nEnter Choice: ");
-		getline(cin, choiceConvert);
+                printf("\nConvert your text to:\n--------------------\nBinary\t\t(B)\nDecimal\t\t(D)\nHexaDecimal\t(H)\nOctal\t\t(O)\n\nBack\t\t(E)\n\nEnter Choice: ");
+                getline(cin, choiceConvert);
 
-		if(!check(choiceConvert)) return;;
+                if(!check(choiceConvert)) return;;
 
-		if(choiceConvert == "E"){
-				printf("\n\n");
-				return;
-		}
-
-
-		printf("What text are you converting from? (B,D,H,O): ");
-		getline(cin, choiceCur);
-
-		if(!check(choiceCur)) return;
-
-		printf("Input -> ");
-		getline(cin, input);
+                if(choiceConvert == "E"){
+                                printf("\n\n");
+                                return;
+                }
 
 
-		string out;
+                printf("What text are you converting from? (B,D,H,O): ");
+                getline(cin, choiceCur);
+
+                if(!check(choiceCur)) return;
+
+                printf("Input -> ");
+                getline(cin, input);
 
 
-		if((choiceConvert == "B")){
-			try{
-				string size;
-
-				printf("Specify the  maximum bit length(default is min): ");
-				getline(cin, size);
-				size_t bitlen;
-
-				if(size == ""){
-					bitlen = 0;
-				}else{
-					bitlen = static_cast<size_t>(stoll(size));
-				}
-
-				out = binary(choiceCur,input,bitlen);
-					if((out == "") || (out == "ERR")) return;
-
-				cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
-			}catch(const std::invalid_argument& e){
-				cerr << "Wrong data type!\n" << endl;
-			}
-		}else if(choiceConvert == "D"){
-				out = decimal(choiceCur,input);
-					if((out == "") || (out == "ERR")) return;
+                string out;
 
 
-				cout << "\n=============\n" << input << " >> " << out << " (" << out.length() << " bits)\n=============\n" << endl;
-		}else if(choiceConvert == "H"){
-				out = hex(choiceCur,input);
-					if((out == "") || (out == "ERR")) return;
+                if((choiceConvert == "B")){
+                        try{
+                                string size;
 
-				cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
-		}else if(choiceConvert == "O"){
-				out = octal(choiceCur,input);
-					if((out == "") || (out == "ERR")) return;
+                                printf("Specify the  maximum bit length(default is min): ");
+                                getline(cin, size);
+                                size_t bitlen;
 
-				cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
-		}else{
-			printf("\n\n");
-	    }
+                                if(size == ""){
+                                        bitlen = 0;
+                                }else{
+                                        bitlen = static_cast<size_t>(stoll(size));
+                                }
+
+                                out = binary(choiceCur,input,bitlen);
+                                        if((out == "") || (out == "ERR")) return;
+
+                                cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
+                        }catch(const std::invalid_argument& e){
+                                cerr << "Wrong data type!\n" << endl;
+                        }
+                }else if(choiceConvert == "D"){
+                                out = decimal(choiceCur,input);
+                                        if((out == "") || (out == "ERR")) return;
+
+
+                                cout << "\n=============\n" << input << " >> " << out << " (" << out.length() << " bits)\n=============\n" << endl;
+                }else if(choiceConvert == "H"){
+                                out = hex(choiceCur,input);
+                                        if((out == "") || (out == "ERR")) return;
+
+                                cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
+                }else if(choiceConvert == "O"){
+                                out = octal(choiceCur,input);
+                                        if((out == "") || (out == "ERR")) return;
+
+                                cout << "\n=============\n" << input << " >> " << out  << " (" << out.length() << " bits)\n=============\n" << endl;
+                }else{
+                        printf("\n\n");
+            }
 }
 
 void calculate(){
-	string choice;
+        string choice;
 
-	printf("\n===========\nSelect your operation...\n\nOne's Complement (O)\nAddition\t (A)\nTwo's Complement (C)\nSubtraction\t (S)\n\n\nBack\t\t (E)\n\nEnter Choice:\t");
-	getline(cin, choice);
+        printf("\n===========\nSelect your operation...\n\nOne's Complement (O)\nAddition\t (A)\nTwo's Complement (C)\nSubtraction\t (S)\n\n\nBack\t\t (E)\n\nEnter Choice:\t");
+        getline(cin, choice);
 
-	string out;
+        string out;
 
-	if(choice == "O"){
-		printf("What text are you converting from? (B,D,H,O): ");
-					getline(cin, choice);
-					if(!check(choice)) return;
+        if(choice == "O"){
+                printf("What text are you converting from? (B,D,H,O): ");
+                                        getline(cin, choice);
+                                        if(!check(choice)) return;
 
-					string input;
-					printf("Input -> ");
-					getline(cin, input);
+                                        string input;
+                                        printf("Input -> ");
+                                        getline(cin, input);
 
 
-		out = oneComplement(input,choice);
+                out = oneComplement(input,choice);
 
-		if((out == "") || (out == "ERR")) return;
+                if((out == "") || (out == "ERR")) return;
 
-		cout << "\n=============\n" << input << " >> " << out <<"\n=============\n" << endl;
-	}else if(choice == "A"){
-		string inputOne;
-		string inputTwo;
-		string numType;
+                cout << "\n=============\n" << input << " >> " << out <<"\n=============\n" << endl;
+        }else if(choice == "A"){
+                string inputOne;
+                string inputTwo;
+                string numType;
 
-		printf("What text are you converting from? (B,D,H,O): ");
-					getline(cin, numType);
-					if(!check(numType)) return;
+                printf("What text are you converting from? (B,D,H,O): ");
+                                        getline(cin, numType);
+                                        if(!check(numType)) return;
 
-		printf("Input One >> ");
-			getline(cin, inputOne);
-		printf("Input Two >> ");
-			getline(cin, inputTwo);
+                printf("Input One >> ");
+                        getline(cin, inputOne);
+                printf("Input Two >> ");
+                        getline(cin, inputTwo);
 
-		out = add(inputOne, inputTwo, numType);
+                out = add(inputOne, inputTwo, numType);
 
-		if((out == "") || (out == "ERR")) return;
+                if((out == "") || (out == "ERR")) return;
 
-		cout << "\n=============\n" << inputOne << " + " << inputTwo << " = " << out << " ("<< out.size() << " bits)\n=============\n" << endl;
-	}else if(choice == "C"){
-		string input;
-		string numType;
+                cout << "\n=============\n" << inputOne << " + " << inputTwo << " = " << out << " ("<< out.size() << " bits)\n=============\n" << endl;
+        }else if(choice == "C"){
+                string input;
+                string numType;
 
-		printf("What text are you converting from? (B,D,H,O): ");
-					getline(cin, numType);
-					if(!check(numType)) return;
+                printf("What text are you converting from? (B,D,H,O): ");
+                                        getline(cin, numType);
+                                        if(!check(numType)) return;
 
-		printf("Input >> ");
-		getline(cin, input);
+                printf("Input >> ");
+                getline(cin, input);
 
-		out = twoComplement(input, numType);
+                out = twoComplement(input, numType);
 
-		if((out == "") || (out == "ERR")) return;
+                if((out == "") || (out == "ERR")) return;
 
-		cout << "\n=============\n" << input << " >> " << out <<"\n=============\n" << endl;
-	}else if(choice == "S"){
-		string inputOne;
-		string inputTwo;
-		string numType;
+                cout << "\n=============\n" << input << " >> " << out <<"\n=============\n" << endl;
+        }else if(choice == "S"){
+                string inputOne;
+                string inputTwo;
+                string numType;
 
-		printf("What text are you converting from? (B,D,H,O): ");
-					getline(cin, numType);
-					if(!check(numType)) return;
+                printf("What text are you converting from? (B,D,H,O): ");
+                                        getline(cin, numType);
+                                        if(!check(numType)) return;
 
-		printf("Input One >> ");
-			getline(cin, inputOne);
-		printf("Input Two >> ");
-			getline(cin, inputTwo);
-		out = subtract(inputOne, inputTwo, numType);
+                printf("Input One >> ");
+                        getline(cin, inputOne);
+                printf("Input Two >> ");
+                        getline(cin, inputTwo);
+                out = subtract(inputOne, inputTwo, numType);
 
-		if((out == "") || (out == "RR")) return;
+                if((out == "") || (out == "RR")) return;
 
-		cout << "\n=============\n" << inputOne << " - " << inputTwo << " = " << out << " ("<< out.size() << " bits)\n=============\n" << endl;
-	}else{
-		printf("\n\n");
-	}
+                cout << "\n=============\n" << inputOne << " - " << inputTwo << " = " << out << " ("<< out.size() << " bits)\n=============\n" << endl;
+        }else{
+                printf("\n\n");
+        }
 }
 
 
 string twoComplement(string input, string numType){
-	if(numType != "B"){
-		input = binary(numType,input,0);
-	}
+        if(!checkType(input,numType)) return "ERR";
 
-	/*
-	    size_t bitLength = input.size();
-	    input = string(bitLength - input.size(), '0') + input;
-	*/
+        if(numType != "B"){
+                input = binary(numType,input,0);
+        }
 
-	input = oneComplement(input,"B");
+        /*
+                size_t bitLength = input.size();
+            input = string(bitLength - input.size(), '0') + input;
+        */
 
-	return add(input,"1","B");
+        input = oneComplement(input,"B");
+
+        return add(input,"1","B");
 }
 
 string subtract(string inputOne, string inputTwo, string numType) {
+        if(!checkType(inputOne,numType) || !checkType(inputTwo,numType)) return "ERR";
 
-
-	if (numType != "B") {
-		if(stoll(inputOne) > stoll(inputTwo)){
-			inputOne = binary(numType, inputOne,0);
-			inputTwo = binary(numType, inputTwo,inputOne.length());
-		}else{
-			inputTwo = binary(numType, inputTwo,0);
-			inputOne = binary(numType, inputOne,inputTwo.length());
-		}
+        if (numType != "B") {
+                if(stoll(inputOne) > stoll(inputTwo)){
+                        inputOne = binary(numType, inputOne,0);
+                        inputTwo = binary(numType, inputTwo,inputOne.length());
+                }else{
+                        inputTwo = binary(numType, inputTwo,0);
+                        inputOne = binary(numType, inputOne,inputTwo.length());
+                }
     }
 
-	size_t bitLength = max(inputOne.size(), inputTwo.size());
-	//inputOne = string(bitLength - inputOne.size(), '0') + inputOne;
-	//inputTwo = string(bitLength - inputTwo.size(), '0') + inputTwo;
+        size_t bitLength = max(inputOne.size(), inputTwo.size());
+        //inputOne = string(bitLength - inputOne.size(), '0') + inputOne;
+        //inputTwo = string(bitLength - inputTwo.size(), '0') + inputTwo;
 
     //cout << "\n****\n\t" << inputOne << "\n-\t" << inputTwo << "\n___________\n" << endl;
     inputTwo = twoComplement(inputTwo, "B");
@@ -423,85 +425,103 @@ string subtract(string inputOne, string inputTwo, string numType) {
     return result;
 }
 
+/*
+ * 10100
+ * 01010
+ *
+ * 10100
+ * 10110
+ *
+ * 11010
+ *
+ * 00110
+ *
+ */
+
 string add(string inputOne,string inputTwo,string numType){
+        if(!checkType(inputOne,numType) || !checkType(inputTwo,numType)) return "ERR";
 
-	if(numType != "B"){
-		inputOne = binary(numType,inputOne,0);
-		inputTwo = binary(numType,inputTwo,0);
-	}
+        if(numType != "B"){
+                inputOne = binary(numType,inputOne,0);
+                inputTwo = binary(numType,inputTwo,0);
+        }
 
-	string out = "";
-	int carryin = 0;
-	size_t maxLen = max(inputOne.size(), inputTwo.size());
-
-
-	reverse(inputOne.begin(), inputOne.end());
-	reverse(inputTwo.begin(), inputTwo.end());
-
-	for(size_t i = 0; i < maxLen; ++i){
-		int inOneRef = inputOne[i];
-		int inTwoRef = inputTwo[i];
-
-		if( (inOneRef != 1 && inOneRef != 0) || (inTwoRef != 1 && inTwoRef != 0)){
-			printf("Error: Wrong data type!\n");
-			return "ERR";
-		}
-
-		int ref1 = (i < inputOne.length()) ? inOneRef - '0' : 0;
-		int ref2 = (i < inputTwo.length()) ? inTwoRef - '0' : 0;
-		int sum = (ref1 ^ ref2) ^ carryin;
-		out = (char)(sum + '0') + out;
-
-		carryin = (ref1 & ref2) | (carryin & (ref1 ^ ref2));
-
-	}
-
-		if(carryin){
-			out = (char)(carryin + '0') + out;
-		}
+        string out = "";
+        int carryin = 0;
+        size_t maxLen = max(inputOne.size(), inputTwo.size());
 
 
-		if(numType == "D"){
-			out =  decimal("B",out);
-		}else if(numType == "H"){
-			out = hex("B",out);
-		}else if(numType == "O"){
-			out = octal("B",out);
-		}
+        reverse(inputOne.begin(), inputOne.end());
+        reverse(inputTwo.begin(), inputTwo.end());
+
+        for(size_t i = 0; i < maxLen; ++i){
+                int inOneRef = inputOne[i];
+                int inTwoRef = inputTwo[i];
 
 
-	return out;
+                /*
+                if( (inOneRef != 1 && inOneRef != 0) || (inTwoRef != 1 && inTwoRef != 0)){
+                        printf("Error: Wrong data type!\n");
+                        return "ERR";
+                }
+                */
+
+                int ref1 = (i < inputOne.length()) ? inOneRef - '0' : 0;
+                int ref2 = (i < inputTwo.length()) ? inTwoRef - '0' : 0;
+                int sum = (ref1 ^ ref2) ^ carryin;
+                out = (char)(sum + '0') + out;
+
+                carryin = (ref1 & ref2) | (carryin & (ref1 ^ ref2));
+
+        }
+
+                if(carryin){
+                        out = (char)(carryin + '0') + out;
+                }
+
+
+                if(numType == "D"){
+                        out =  decimal("B",out);
+                }else if(numType == "H"){
+                        out = hex("B",out);
+                }else if(numType == "O"){
+                        out = octal("B",out);
+                }
+
+
+        return out;
 }
 
 
 string oneComplement(string input,string choice){
+                 if(!checkType(input,choice)) return "ERR";
 
-		if(choice != "B") input = binary(choice,input,0);
+                if(choice != "B") input = binary(choice,input,0);
 
-		string out = "";
+                string out = "";
 
-		for(char c : input){
-			if(c != '0' && c != '1') return "Error: Input must be binary (0 or 1)";
-			out += (c - '0') == 0 ? '1' : '0';
-		}
+                for(char c : input){
+                        if(c != '0' && c != '1') return "Error: Input must be binary (0 or 1)";
+                        out += (c - '0') == 0 ? '1' : '0';
+                }
 
-		if(choice == "D"){
-			return decimal("B",out);
-		}else if(choice == "H"){
-			return hex("B",out);
-		}else if(choice == "O"){
-			return octal("B",out);
-		}else{
-			return out;
-		}
+                if(choice == "D"){
+                        return decimal("B",out);
+                }else if(choice == "H"){
+                        return hex("B",out);
+                }else if(choice == "O"){
+                        return octal("B",out);
+                }else{
+                        return out;
+                }
 }
 
 
 
 bool check(string choiceConvert){
-		if(choiceConvert == "ERR") return false;
+                //if(choiceConvert == "ERR") return false;
 
-		if(!(choiceConvert =="B" || choiceConvert == "D" || choiceConvert == "H" || choiceConvert == "O" || choiceConvert == "E")){
+                if(!(choiceConvert =="B" || choiceConvert == "D" || choiceConvert == "H" || choiceConvert == "O" || choiceConvert == "E")){
                 printf("Invalid choice. Please try again.\n\n");
                 sleep(1);
                 return false;
@@ -510,42 +530,41 @@ bool check(string choiceConvert){
         }
 }
 
+
 bool checkType(string input,string choice){
-	if(choice == "B"){
-		for(char c : input){
-			if(c != '0' && c != '1'){
-				printf("Error: Wrong data type!\n");
-				return false;
-			}
-		}
-	}else if(choice == "D"){
-		for(char c : input){
-			cout << c << endl;
-			if (c < '0' || c > '9') {
-				printf("Error: Wrong data type!\n");
-				return false;
-			}
-		}
+        if(choice == "B"){
+                for(char c : input){
+                        if(c != '0' && c != '1'){
+                                printf("Error: Wrong data type!\n");
+                                return false;
+                        }
+                }
+        }else if(choice == "D"){
+                for(char c : input){
+                        if (c < '0' || c > '9') {
+                                printf("Error: Wrong data type!\n");
+                                return false;
+                        }
+                }
 
-	}else if(choice == "H"){
-		for(char c : input){
-			if(!((c>=0 && c<=9)||(c>='A' && c<='F'))){
-				printf("Error: Wrong data type!\n");
-				return false;
-			}
-		}
+        }else if(choice == "H"){
+                for(char c : input){
+                        if(!((c>=0 && c<=9)||(c>='A' && c<='F'))){
+                                printf("Error: Wrong data type!\n");
+                                return false;
+                        }
+                }
 
-	}else if(choice == "O"){
-		for(char c : input){
-			if (c < '0' || c > '7') {
-				printf("Error: Wrong data type!\n");
-				return false;
-			}
-		}
-	}else{
-		cout << "Error: Invalid choice\n";
-		return false;
-	}
-	return true;
+        }else if(choice == "O"){
+                for(char c : input){
+                        if (c < '0' || c > '7') {
+                                printf("Error: Wrong data type!\n");
+                                return false;
+                        }
+                }
+        }else{
+                cout << "Error: Invalid choice\n";
+                return false;
+        }
+        return true;
 }
-
