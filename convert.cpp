@@ -549,7 +549,7 @@ bool checkType(string input,string choice){
 
         }else if(choice == "H"){
                 for(char c : input){
-                        if(!((c>=0 && c<=9)||(c>='A' && c<='F'))){
+                        if(!((c>='0'&& c<='9')||(c>='A' && c<='F'))){
                                 printf("Error: Wrong data type!\n");
                                 return false;
                         }
