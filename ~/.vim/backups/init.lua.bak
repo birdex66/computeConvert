@@ -1,0 +1,91 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git", lazypath
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Load plugins
+require("lazy").setup("config.plugins")
+
+package.path = package.path .. ";/usr/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?.lua"
+vim.opt.termguicolors = true
+
+-- Set tab width to X spaces
+vim.opt.tabstop = 4        -- Number of spaces for a tab
+vim.opt.softtabstop = 4    -- Number of spaces for editing <Tab>
+vim.opt.shiftwidth = 4     -- Number of spaces for auto-indent
+vim.opt.expandtab = true   -- Convert tabs to spaces
+
+-- Enable auto-indentation
+vim.opt.autoindent = true  -- Copy indent from the previous line
+vim.opt.smartindent = true -- Smart auto-indentation
+
+-- Enable static line numbers permanently
+-- vim.wo.number = true
+
+-- Enable absolute and relative line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+-- Enable backups
+vim.o.backup = true
+vim.o.backupdir = "~/.vim/backups"  -- Directory for backup files
+vim.o.backupext = ".bak"           -- Extension for backup files
+
+-- Catppuccin
+-- vim.cmd.colorscheme "catppuccin-macchiato" --*
+-- vim.cmd.colorscheme "catppuccin-frappe"
+-- vim.cmd.colorscheme "catppuccin-mocha" --*
+-- vim.cmd.colorscheme "catppuccin-latte"
+
+-- Nightfox
+-- vim.cmd.colorscheme "dayfox"
+-- vim.cmd.colorscheme "dawnfox"   
+
+-- vim.cmd.colorscheme "duskfox"  --*
+-- vim.cmd.colorscheme "terafox" --*
+ vim.cmd.colorscheme "nordfox"  --*
+-- vim.cmd.colorscheme "nightfox" --*  
+-- vim.cmd.colorscheme "carbonfox" --*
+
+-- EF Themes
+-- vim.cmd.colorscheme("ef-elea-dark") --* 
+-- vim.cmd.colorscheme "ef-maris-dark"
+-- vim.cmd.colorscheme "ef-tint"
+-- vim.cmd.colorscheme "ef-kassio" --*
+-- vim.cmd.colorscheme "ef-arbutus"
+-- vim.cmd.colorscheme "ef-spring"
+-- vim.cmd.colorscheme "ef-light" --*
+-- vim.cmd.colorscheme "ef-summer"
+-- vim.cmd.colorscheme "ef-dream" --*
+-- vim.cmd.colorscheme "ef-cyprus"
+-- vim.cmd.colorscheme "ef-trio-dark" 
+-- vim.cmd.colorscheme "ef-false" --*
+-- vim.cmd.colorscheme "ef-winter"
+-- vim.cmd.colorscheme "ef-day" --*
+-- vim.cmd.colorscheme "ef-melissa-dark" --*
+-- vim.cmd.colorscheme "ef-cherie"
+-- vim.cmd.colorscheme "ef-reverie" --*
+-- vim.cmd.colorscheme "ef-duo-dark"
+-- vim.cmd.colorscheme "ef-autumn"
+-- vim.cmd.colorscheme "ef-owl"
+-- vim.cmd.colorscheme "ef-symbiosis" --*
+-- vim.cmd.colorscheme "ef-trio-light"
+-- vim.cmd.colorscheme "ef-maris-light" --*
+-- vim.cmd.colorscheme "ef-deuteranopia-dark"
+-- vim.cmd.colorscheme "ef-eagle"
+-- vim.cmd.colorscheme "ef-rosa" --*
+-- vim.cmd.colorscheme "ef-duo-light" --*
+-- vim.cmd.colorscheme "ef-night"
+-- vim.cmd.colorscheme "ef-tritanopia-dark"
+-- vim.cmd.colorscheme "ef-deuteranopia-light"
+-- vim.cmd.colorscheme "ef-bio" 
+-- vim.cmd.colorscheme "ef-melissa-light" --*
+-- vim.cmd.colorscheme "ef-tritanopia-light"
+-- vim.cmd.colorscheme "ef-dark"
+-- vim.cmd.colorscheme "ef-elea-light" --*
+-- vim.cmd.colorscheme "ef-frost"
+

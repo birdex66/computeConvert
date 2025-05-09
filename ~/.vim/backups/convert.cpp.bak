@@ -40,7 +40,7 @@ int main(int argc, char** argv){
         string choice;
         if(!preserve) system("clear");
 
-        if(!history.empty()) cout << history[history.size()-1].operation << endl;
+        if(!history.empty()) cout << history[history.size()-1]->operation << endl;
 
         printf("\nWelcome...\n====================\nCalculate\t(1)\nConvert\t\t(2)\nLog\t\t(3)\n\nExit\t\t(E)\n\nEnter Choice:\t");
 
